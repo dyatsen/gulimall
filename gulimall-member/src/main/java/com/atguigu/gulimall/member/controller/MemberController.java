@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import com.atguigu.gulimall.member.feign.CouponFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,21 @@ import com.atguigu.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    CouponFeignService couponFeignService;
+
+    @RequestMapping("/coupons")
+    public R test() {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("zhangsan");
+        R memberCoupons = couponFeignService.memberCoupons();
+        // 这里的名字要和远程服务gulimall-coupon那边放入的名字相同
+        Object coupons = memberCoupons.get("coupons");
+
+        // 第一个put是本地查询到的zhangsan，第二个put是把远程服务的查询结果放进结果
+        return R.ok().put("member", memberEntity).put("coupons", coupons);
+    }
 
     /**
      * 列表

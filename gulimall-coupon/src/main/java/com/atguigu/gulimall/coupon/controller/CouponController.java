@@ -35,7 +35,7 @@ public class CouponController {
     @RequestMapping("/member/list")
     public R memberCoupons() {
         CouponEntity couponEntity = new CouponEntity();
-        couponEntity.setCouponName("第一个优惠券名字");
+        couponEntity.setCouponName("假的优惠券");
         return R.ok().put("coupons", Arrays.asList(couponEntity));
     }
 
