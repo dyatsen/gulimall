@@ -5,6 +5,8 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +27,23 @@ import com.atguigu.common.utils.R;
  * @email 705501518@qq.com
  * @date 2021-05-11 10:05:40
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @Value("${coupon-username}")
+    private String username;
+
+    @Value("${coupon-age}")
+    private Integer age;
+
+    @RequestMapping("/getValue")
+    public R getValueTest() {
+        return R.ok().put("username", username).put("age", age);
+    }
 
     // 返回某个会员的所有优惠券
     @RequestMapping("/member/list")

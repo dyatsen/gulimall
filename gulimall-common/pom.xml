@@ -37,7 +37,7 @@
             <version>2.6</version>
         </dependency>
 
-<!--        mysql驱动-->
+        <!--        mysql驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -48,13 +48,20 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
-<!--            目标环境Tomcat中都会自带，所以打包的时候可以不打-->
+            <!--            目标环境Tomcat中都会自带，所以打包的时候可以不打-->
             <scope>provided</scope>
         </dependency>
 
+        <!--        服务注册/发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!--        配置中心来做配置管理-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
     </dependencies>
 
