@@ -1,3 +1,5 @@
+# 通过条件，控制URI的去向
+
 spring:
   cloud:
     gateway:
@@ -11,3 +13,10 @@ spring:
           uri: https://www.qq.com
           predicates:
             - Query=url,qq
+
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**      #前端项目中所有请求都带上/api的前缀，所以所有请求都先转到renren-fast
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
